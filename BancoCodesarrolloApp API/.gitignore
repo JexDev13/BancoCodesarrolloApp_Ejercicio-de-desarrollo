@@ -112,6 +112,9 @@ ipch/
 *.VC.db
 *.VC.VC.opendb
 
+# Entity Framework Migrations
+Migrations/*
+
 # Visual Studio profiler
 *.psess
 *.vsp
