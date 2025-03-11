@@ -33,6 +33,10 @@ namespace BancoCodesarrolloApp_API.Context
                 .HasForeignKey<Usuario>(u => u.Id);
 
             modelBuilder.Entity<Cuenta>()
+            .HasIndex(p => p.NumeroCuenta)
+            .IsUnique();
+
+            modelBuilder.Entity<Cuenta>()
                 .HasOne(c => c.Usuario)
                 .WithMany(u => u.Cuentas)
                 .HasForeignKey(c => c.UsuarioId);
