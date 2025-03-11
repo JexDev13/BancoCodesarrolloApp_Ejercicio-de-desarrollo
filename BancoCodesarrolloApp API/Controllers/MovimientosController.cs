@@ -33,7 +33,7 @@ namespace BancoCodesarrolloApp_API.Controllers
         public async Task<ActionResult<MovimientoConsultaDTO>> CrearMovimiento([FromBody] MovimientoCreacionDTO nuevoMovimiento)
         {
             var cuenta = await _context.Cuentas
-                .FirstOrDefaultAsync(c => c.NumeroCuenta == nuevoMovimiento.NumeroCuenta);
+                .FirstOrDefaultAsync(c => c.Id == nuevoMovimiento.CuentaId);
 
             if (cuenta == null) return NotFound(new { mensaje = "Cuenta no encontrada" });
 
