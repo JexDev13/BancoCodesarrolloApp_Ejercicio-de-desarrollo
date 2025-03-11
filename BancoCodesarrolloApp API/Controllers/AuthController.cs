@@ -113,6 +113,24 @@ namespace BancoCodesarrolloApp_API.Controllers
             return Ok("Sesión cerrada correctamente.");
         }
 
+        //método para cambiar contraseña del usuario
+        [HttpPatch("cambiar-contraseña", Name = "CambiarContraseñaUsuario")]
+        [ServiceFilter(typeof(ActionFilterToken))]
+        public async Task<IActionResult> CambiarContraseña([FromBody] CambiarCredencialesUsuarioDTO credenciales)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.CorreoElectronico == credenciales.Email);
+            if (usuario == null) return NotFound(new { mensaje = "Usuario no encontrado" });
+
+            var hasher = new PasswordHasher<Usuario>();
+            usuario.Contraseña = hasher.HashPassword(usuario, credenciales.NewPassword); // Se hashea correctamente
+
+            _context.Usuarios.Update(usuario);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { mensaje = "Contraseña actualizada exitosamente" });
+        }
+
+
         private async Task AdministrarSesion(int usuarioId, UserToken token)
         {
             var sesionExistente = await _context.Sessions.FirstOrDefaultAsync(x => x.UsuarioId == usuarioId);
