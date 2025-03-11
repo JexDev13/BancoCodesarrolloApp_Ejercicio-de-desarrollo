@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BancoCodesarrolloApp_API.Context;
 using BancoCodesarrolloApp_API.DTO.Cuenta;
-using BancoCodesarrolloApp_API.DTO.Usuario;
 using BancoCodesarrolloApp_API.Models;
 using BancoCodesarrolloApp_API.Services.Token;
 using BancoCodesarrolloApp_API.Utils.GeneradorCuentas;

@@ -9,6 +9,6 @@ namespace BancoCodesarrolloApp_API.DTO.Movimiento
         [Required]
         public decimal Valor { get; set; }
         [Required]
-        public int CuentaId { get; set; }
+        public string NumeroCuenta { get; set; } = string.Empty;
     }
 }
