@@ -1,0 +1,591 @@
+{
+	"info": {
+		"_postman_id": "51a58099-b9a7-454c-b434-5b1c817daf4e",
+		"name": "Banco Codesarrollo API",
+		"description": "EJERCICIO DESARROLLO DE APLICACIONES DE SOFTWARE\n\nOBJETIVOS GENERALES:\n• Implementar las buenas prácticas pertinentes según su criterio.\n• Gestionar de manera adecuada las excepciones.\n• Este ejercicio técnico es parte del proceso de evaluación para una pasantía en el Banco Codesarrollo.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43003354"
+	},
+	"item": [
+		{
+			"name": "AuthController",
+			"item": [
+				{
+					"name": "SignUp",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"string\",\n  \"apellido\": \"string\",\n  \"correoElectronico\": \"string\",\n  \"identificacion\": \"string\",\n  \"direccion\": \"string\",\n  \"contraseña\": \"string\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Auth/SignUp",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Auth",
+								"SignUp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"string\",\n  \"password\": \"string\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Auth/Login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Auth",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/Auth/Logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Auth",
+								"Logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cambiar Contraseña",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"string\",\n  \"newPassword\": \"string\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Auth/cambiar-contraseña",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Auth",
+								"cambiar-contraseña"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "El controlador `AuthController` se encarga de gestionar la autenticación de los usuarios en la aplicación. Incluye métodos para iniciar sesión, generar y validar tokens JWT (JSON Web Tokens) y manejar las operaciones relacionadas con la autenticación. Este controlador garantiza que solo los usuarios autenticados puedan acceder a los recursos protegidos de la aplicación."
+		},
+		{
+			"name": "UserController",
+			"item": [
+				{
+					"name": "Obtener Usuario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/User/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"User",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Usuario",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"string\",\n  \"apellido\": \"string\",\n  \"direccion\": \"string\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/User/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"User",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activar/Desactivar Usuario",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/User/estado/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"User",
+								"estado",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/User/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"User",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "El `UserController` gestiona las operaciones relacionadas con los usuarios de la aplicación, tales como crear, obtener, actualizar y eliminar usuarios. Además, ofrece funcionalidades como activar/desactivar un usuario, gestionando la información personal y las configuraciones relacionadas con los usuarios del sistema. A través de este controlador, se implementan los endpoints para acceder y modificar la información de los usuarios."
+		},
+		{
+			"name": "CuentasController",
+			"item": [
+				{
+					"name": "Crear Cuenta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"UsuarioId\": \"{{usuarioId}}\",\n  \"TipoCuenta\": \"{{tipoCuenta}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Cuentas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Cuenta por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/Cuentas/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Cuentas",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Cuenta por Número",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/Cuentas/numero/{{numeroCuenta}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Cuentas",
+								"numero",
+								"{{numeroCuenta}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Cuentas por Usuario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/Cuentas/usuario/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Cuentas",
+								"usuario",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Saldo de la Cuenta",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Saldo\": \"{{nuevoSaldo}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Cuentas/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Cuentas",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activar/Desactivar Cuenta",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/Cuentas/estado/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Cuentas",
+								"estado",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Cuenta",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/cuentas/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"cuentas",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "El controlador `CuentasController` maneja las operaciones relacionadas con las cuentas bancarias dentro de la aplicación. Permite crear nuevas cuentas, obtener cuentas por ID o número de cuenta, consultar las cuentas asociadas a un usuario, actualizar el saldo de una cuenta, y activar/desactivar o eliminar cuentas. Este controlador facilita la administración de las cuentas y su estado en la plataforma, garantizando la integridad de las operaciones relacionadas."
+		},
+		{
+			"name": "MovimientosController",
+			"item": [
+				{
+					"name": "Crear Movimiento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"NumeroCuenta\": \"{{numeroCuenta}}\",\n  \"TipoMovimiento\": \"{{tipoMovimiento}}\",\n  \"Valor\": \"{{valor}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Movimientos",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Movimientos por Cuenta",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/Movimientos/cuenta/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Movimientos",
+								"cuenta",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Movimiento por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/Movimientos/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Movimientos",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Movimientos por Usuario",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/Movimientos/usuario/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Movimientos",
+								"usuario",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Movimiento",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/Movimientos/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Movimientos",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "El `MovimientosController` gestiona los movimientos financieros asociados a las cuentas bancarias de la aplicación. Esto incluye la creación de nuevos movimientos (débito o crédito), la consulta de movimientos por cuenta o por usuario, la eliminación de movimientos y la actualización de saldos en las cuentas vinculadas. Este controlador es fundamental para registrar y rastrear las transacciones que se realizan en el sistema, y permite gestionar el historial de movimientos financieros de los usuarios y sus cuentas."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://localhost:7213"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
