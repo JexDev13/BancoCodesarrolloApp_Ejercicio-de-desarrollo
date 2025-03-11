@@ -1,1 +1,11 @@
-<p>dashboard works!</p>
+<div class="cuentas-container">
+  <div *ngFor="let cuenta of cuentas" class="cuenta-card" (click)="verMovimientos(cuenta.id)">
+    <mat-card class="mat-card">
+      <mat-card-title>{{ cuenta.numeroCuenta }}</mat-card-title>
+      <mat-card-subtitle>{{ cuenta.tipoCuenta }}</mat-card-subtitle>
+      <mat-card-content>
+        <p><strong>Saldo:</strong> ${{ cuenta.saldo | number : "1.2-2" }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

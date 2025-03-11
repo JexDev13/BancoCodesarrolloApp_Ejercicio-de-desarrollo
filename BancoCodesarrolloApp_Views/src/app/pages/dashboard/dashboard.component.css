@@ -1,0 +1,16 @@
+.cuentas-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);  /* 4 cuentas por fila */
+  gap: 20px;  /* Espacio entre las tarjetas */
+}
+
+.cuenta-card {
+  cursor: pointer;
+}
+
+.mat-card {
+  width: 100%;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 interface LoginResponse {
   token: string;
@@ -15,7 +16,7 @@ interface LoginResponse {
 export class AuthService {
   private apiUrl = 'https://localhost:7213/api/Auth/Login';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(this.apiUrl, { email, password });
@@ -37,5 +38,14 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  getUserIdFromToken(): number | null {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decoded: any = jwtDecode(token);
+      return decoded.UsuarioId;
+    }
+    return null;
   }
 }
