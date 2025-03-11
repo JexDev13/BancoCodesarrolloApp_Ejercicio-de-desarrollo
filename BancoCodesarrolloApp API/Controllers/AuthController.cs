@@ -130,7 +130,6 @@ namespace BancoCodesarrolloApp_API.Controllers
             return Ok(new { mensaje = "Contraseña actualizada exitosamente" });
         }
 
-
         private async Task AdministrarSesion(int usuarioId, UserToken token)
         {
             var sesionExistente = await _context.Sessions.FirstOrDefaultAsync(x => x.UsuarioId == usuarioId);

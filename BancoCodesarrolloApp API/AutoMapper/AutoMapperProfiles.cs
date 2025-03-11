@@ -16,7 +16,8 @@ namespace BancoCodesarrolloApp_API.AutoMapper
             CreateMap<UsuarioActualizacionDTO, Usuario>().ReverseMap();
             CreateMap<UsuarioConsultaDTO, Usuario>().ReverseMap();
             CreateMap<Usuario, UsuarioConsultaDTO>()
-                .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => $"{src.Nombre} {src.Apellido}"))
+                .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => $"{src.Nombre}"))
+                .ForMember(dest => dest.Apellido, opt => opt.MapFrom(src => $"{src.Apellido}"))
                 .ForMember(dest => dest.CorreoElectronico, opt => opt.MapFrom(src => src.CorreoElectronico))
                 .ForMember(dest => dest.Identificacion, opt => opt.MapFrom(src => src.Identificacion))
                 .ForMember(dest => dest.Direccion, opt => opt.MapFrom(src => src.Direccion));

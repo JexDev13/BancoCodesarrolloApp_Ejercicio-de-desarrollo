@@ -54,7 +54,8 @@ namespace BancoCodesarrolloApp_API.Controllers
             _context.Usuarios.Update(usuario);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            var usuarioActualizado = _mapper.Map<UsuarioConsultaDTO>(usuario);
+            return Ok(usuarioActualizado);
         }
 
         //Método para desactivar/activar el usuario
@@ -88,6 +89,13 @@ namespace BancoCodesarrolloApp_API.Controllers
 
                 if (usuario == null) return NotFound(new { mensaje = "Usuario no encontrado" });
 
+                var sesion = await _context.Sessions.FirstOrDefaultAsync(s => s.UsuarioId == id);
+                if (sesion != null)
+                {
+                    _context.Sessions.Remove(sesion);
+                    await _context.SaveChangesAsync();
+                }
+
                 var movimientos = usuario.Cuentas.SelectMany(c => c.Movimientos).ToList();
                 if (movimientos.Any())
                 {
@@ -108,13 +116,6 @@ namespace BancoCodesarrolloApp_API.Controllers
                 if (persona != null)
                 {
                     _context.Personas.Remove(persona);
-                    await _context.SaveChangesAsync();
-                }
-
-                var sesion = await _context.Sessions.FirstOrDefaultAsync(s => s.UsuarioId == id);
-                if (sesion != null)
-                {
-                    _context.Sessions.Remove(sesion);
                     await _context.SaveChangesAsync();
                 }
 

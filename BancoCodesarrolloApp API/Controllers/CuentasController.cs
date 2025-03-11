@@ -105,7 +105,9 @@ namespace BancoCodesarrolloApp_API.Controllers
             cuenta.Saldo = cuentaDto.Saldo;
             _context.Cuentas.Update(cuenta);
             await _context.SaveChangesAsync();
-            return NoContent();
+
+            var cuentaActualizada = _mapper.Map<CuentaConsultaDTO>(cuenta);
+            return CreatedAtRoute("GetCuenta", new { id = cuenta.Id }, cuentaActualizada);
         }
 
         //Método para desactivar/activar la cuenta
